@@ -109,11 +109,13 @@ extension ViewController {
             
             let posterURL = URL(string: posterString)!
             
-            self.button.isHidden = true
+            OperationQueue.main.addOperation {
+                self.button.isHidden = true
+                self.downloadImage(at: posterURL)
+            }
             
-            self.downloadImage(at: posterURL)
             
-            }.resume()
+        }.resume()
     }
     
     func downloadImage(at url: URL) {
@@ -128,9 +130,12 @@ extension ViewController {
             
             let image = UIImage(data: imageData)!
             
-            self.display(image: image)
+            OperationQueue.main.addOperation {
+                self.display(image: image)
+            }
             
-            }.resume()
+            
+        }.resume()
     }
     
     
